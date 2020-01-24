@@ -64,12 +64,14 @@ class UserData {
   UserData({this.id, this.username, this.avatar});
 
   factory UserData.fromJson(Map<String, dynamic> json) {
-    String _avatar = json['avatar'].toString();
+    // String _avatar = json['avatar'].toString();
+    String _avatar = 'https://i.pravatar.cc/300?u=' + json['name'].toString();
 
     return UserData(
       id: json['id'] as int,
       username: json['name'] as String,
-      avatar: _avatar.substring(0, _avatar.indexOf('?')),
+      // avatar: _avatar.substring(0, _avatar.indexOf('?')),
+      avatar: _avatar,
     );
   }
 
@@ -81,7 +83,8 @@ class UserData {
   static Future<List<UserData>> fetchUserData(http.Client client) async {
     final response =
       // await client.get('https://jsonplaceholder.typicode.com/photos');
-      await client.get('https://api.mockaroo.com/api/6a95ca80?count=10&key=6a6c8690');
+      // await client.get('https://api.randomuser.me/?inc=login,email,picture&results=50&noinfo');
+      await client.get('https://api.mockaroo.com/api/6a95ca80?count=20&key=6a6c8690');
     return compute(parseUserData, response.body);
   }
 }
