@@ -40,7 +40,7 @@ class HomeView extends StatelessWidget {
                         itemCount: viewModel.photos.length,
                         itemBuilder: (context, index) {
                           return Image.network(
-                            viewModel.photos[index].thumbnailUrl,
+                            viewModel.photos[index].avatar,
                           );
                         },
                       ),

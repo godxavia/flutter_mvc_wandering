@@ -14,8 +14,8 @@ class HomeModel extends ChangeNotifier {
   HomeModelStatus _status;
   HomeModelStatus get status => _status;
 
-  List<Photo> _photos = [];
-  List<Photo> get photos => _photos;
+  List<UserData> _photos = [];
+  List<UserData> get photos => _photos;
 
   HomeModel();
 
@@ -26,7 +26,7 @@ class HomeModel extends ChangeNotifier {
   void getter() async {
     _status = HomeModelStatus.Loading;
     notifyListeners();
-    _photos = await Photo.fetchPhotos(http.Client());
+    _photos = await UserData.fetchUserData(http.Client());
     _status = HomeModelStatus.Ended;
     notifyListeners();
   }
@@ -56,29 +56,32 @@ class HomeModel extends ChangeNotifier {
   }
 }
 
-class Photo {
+class UserData {
   final int id;
-  final String title;
-  final String thumbnailUrl;
+  final String username;
+  final String avatar;
 
-  Photo({this.id, this.title, this.thumbnailUrl});
+  UserData({this.id, this.username, this.avatar});
 
-  factory Photo.fromJson(Map<String, dynamic> json) {
-    return Photo(
+  factory UserData.fromJson(Map<String, dynamic> json) {
+    String _avatar = json['avatar'].toString();
+
+    return UserData(
       id: json['id'] as int,
-      title: json['title'] as String,
-      thumbnailUrl: json['thumbnailUrl'] as String,
+      username: json['name'] as String,
+      avatar: _avatar.substring(0, _avatar.indexOf('?')),
     );
   }
 
-  static List<Photo> parsePhotos(String responseBody) {
+  static List<UserData> parseUserData(String responseBody) {
     final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
-    return parsed.map<Photo>((json) => Photo.fromJson(json)).toList();
+    return parsed.map<UserData>((json) => UserData.fromJson(json)).toList();
   }
 
-  static Future<List<Photo>> fetchPhotos(http.Client client) async {
+  static Future<List<UserData>> fetchUserData(http.Client client) async {
     final response =
-      await client.get('https://jsonplaceholder.typicode.com/photos');    
-    return compute(parsePhotos, response.body);
+      // await client.get('https://jsonplaceholder.typicode.com/photos');
+      await client.get('https://api.mockaroo.com/api/6a95ca80?count=10&key=6a6c8690');
+    return compute(parseUserData, response.body);
   }
 }
