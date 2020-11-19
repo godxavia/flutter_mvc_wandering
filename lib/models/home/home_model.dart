@@ -1,5 +1,5 @@
-import 'dart:async';
-import 'dart:convert';
+import 'dart:async' show Future;
+import 'dart:convert' show json;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -82,9 +82,10 @@ class UserData {
 
   static Future<List<UserData>> fetchUserData(http.Client client) async {
     final response =
-      // await client.get('https://jsonplaceholder.typicode.com/photos');
-      // await client.get('https://api.randomuser.me/?inc=login,email,picture&results=50&noinfo');
-      await client.get('https://api.mockaroo.com/api/6a95ca80?count=20&key=6a6c8690');
+        // await client.get('https://jsonplaceholder.typicode.com/photos');
+        // await client.get('https://api.randomuser.me/?inc=login,email,picture&results=50&noinfo');
+        await client
+            .get('https://api.mockaroo.com/api/6a95ca80?count=20&key=6a6c8690');
     return compute(parseUserData, response.body);
   }
 }

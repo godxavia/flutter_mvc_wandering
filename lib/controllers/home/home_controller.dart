@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/material.dart' show BuildContext;
+import 'package:provider/provider.dart' show Provider;
 // import model
 import 'package:flutter_wandering/models/home/home_model.dart';
 
 class HomeController {
   HomeController();
-  
+
   void getter(BuildContext context) {
     HomeModel viewModel = Provider.of<HomeModel>(context, listen: false);
     // TODO Add code here for getter

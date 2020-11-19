@@ -1,5 +1,40 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/material.dart'
+    show
+        Alignment,
+        BoxDecoration,
+        BoxFit,
+        BuildContext,
+        Color,
+        Colors,
+        Column,
+        Container,
+        CustomScrollView,
+        DecoratedBox,
+        EdgeInsets,
+        Expanded,
+        FlexibleSpaceBar,
+        FloatingActionButton,
+        Icon,
+        Icons,
+        Image,
+        LinearGradient,
+        LinearProgressIndicator,
+        MainAxisSize,
+        Padding,
+        Scaffold,
+        Shadow,
+        SliverAppBar,
+        SliverChildBuilderDelegate,
+        SliverGrid,
+        SliverGridDelegateWithMaxCrossAxisExtent,
+        Stack,
+        StackFit,
+        StatelessWidget,
+        StretchMode,
+        Text,
+        TextStyle,
+        Widget;
+import 'package:provider/provider.dart' show ChangeNotifierProvider, Consumer;
 // import model
 import 'package:flutter_wandering/models/home/home_model.dart';
 // import controller
